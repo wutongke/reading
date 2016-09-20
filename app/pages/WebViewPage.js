@@ -104,9 +104,9 @@ class WebViewPage extends React.Component {
             <Text style={[styles.spinnerTitle, { fontSize: 20, color: 'black' }]}>
               分享到
             </Text>
-            <View style={{ flexDirection: 'row', marginTop: 20 }}>
+            <View style={styles.shareParent}>
               <TouchableOpacity
-                style={{ flex: 1 }}
+                style={styles.base}
                 onPress={() => {
                   WeChat.isWXAppInstalled()
                     .then((isInstalled) => {
@@ -139,7 +139,7 @@ class WebViewPage extends React.Component {
                 </View>
               </TouchableOpacity>
               <TouchableOpacity
-                style={{ flex: 1 }}
+                style={styles.base}
                 onPress={() => {
                   WeChat.isWXAppInstalled()
                     .then((isInstalled) => {
@@ -209,7 +209,7 @@ class WebViewPage extends React.Component {
         <WebView
           ref={(ref) => { this.webview = ref; }}
           automaticallyAdjustContentInsets={false}
-          style={{ flex: 1 }}
+          style={styles.base}
           source={{ uri: route.article.url }}
           javaScriptEnabled
           domStorageEnabled
@@ -229,6 +229,9 @@ class WebViewPage extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  base: {
+    flex: 1
+  },
   container: {
     flex: 1,
     flexDirection: 'column',
@@ -254,6 +257,10 @@ const styles = StyleSheet.create({
     color: '#313131',
     textAlign: 'center',
     marginTop: 5
+  },
+  shareParent: {
+    flexDirection: 'row',
+    marginTop: 20
   },
   shareContent: {
     flexDirection: 'column',
