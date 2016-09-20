@@ -60,6 +60,7 @@ class WebViewPage extends React.Component {
     };
     this.onActionSelected = this.onActionSelected.bind(this);
     this.goBack = this.goBack.bind(this);
+    this.hideShareView = this.hideShareView.bind(this);
   }
 
   componentDidMount() {
@@ -93,11 +94,7 @@ class WebViewPage extends React.Component {
     const { route } = this.props;
     return (
       <TouchableWithoutFeedback
-        onPress={() => {
-          this.setState({
-            isShareModal: false
-          });
-        }}
+          onPress={this.hideShareView}
       >
         <View
           key={'spinner'}
@@ -128,6 +125,7 @@ class WebViewPage extends React.Component {
                         toastShort('没有安装微信软件，请您安装微信之后再试');
                       }
                     });
+                  this.hideShareView();
                 }}
               >
                 <View style={styles.shareContent}>
@@ -156,9 +154,11 @@ class WebViewPage extends React.Component {
                           toastShort(error.message);
                         });
                       } else {
+
                         toastShort('没有安装微信软件，请您安装微信之后再试');
                       }
                     });
+                  this.hideShareView();
                 }}
               >
                 <View style={styles.shareContent}>
@@ -176,6 +176,12 @@ class WebViewPage extends React.Component {
         </View>
       </TouchableWithoutFeedback>
     );
+  }
+
+  hideShareView() {
+    this.setState({
+      isShareModal: false
+    });
   }
 
   render() {
